@@ -1,0 +1,315 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FAQ{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    // Just for kicks and layout
+body {
+  margin-top: 30px;
+  background-color: #eee;
+}
+.faq-nav {
+    flex-direction: column;
+    margin: 0 0 32px;
+    border-radius: 2px;    
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 5px rgba(85, 85, 85, 0.15);
+    }
+    .nav-link {
+        position: relative;
+        display: block;
+        margin: 0;
+        padding: 13px 16px;
+        background-color: #fff;
+        border: 0;
+        border-bottom: 1px solid #ddd;
+        border-radius: 0;
+        color: #616161;
+        transition: background-color .2s ease;
+
+        &:hover {
+            background-color: #f6f6f6;
+        }
+        
+        &.active {
+            background-color: #f6f6f6;
+            font-weight: 700;
+            color: rgba(0,0,0,.87);        
+        }
+        
+        &:last-of-type {
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px;
+            border-bottom: 0;
+        }
+        
+        i.mdi {
+            margin-right: 5px;
+            font-size: 18px;
+            position: relative;
+        }
+    }
+}
+
+.tab-content {
+    box-shadow: 0 1px 5px rgba(85, 85, 85, 0.15);
+    
+    .card {
+        border-radius: 0;
+    }
+    
+    .card-header {
+        padding: 15px 16px;
+        border-radius: 0;
+        background-color: #f6f6f6;
+        
+        h5 {
+            margin: 0;
+            
+            button {
+                display: block;
+                width: 100%;
+                padding: 0;
+                border: 0;
+                font-weight: 700;
+                color: rgba(0,0,0,.87);
+                text-align: left;
+                white-space: normal;
+                
+                &:hover,
+                &:focus,
+                &:active,
+                &:hover:active {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    
+    .card-body {
+        p {
+            color: #616161;
+            
+            &:last-of-type {
+                margin: 0;
+            }
+        }
+    }
+}
+
+.accordion {
+    > .card {
+        &:not(:first-child) {
+            border-top: 0;
+        }   
+    }
+}
+
+.collapse.show {
+    .card-body {
+        border-bottom: 1px solid rgba(0,0,0,.125);
+    }
+}
+</style>
+<div class="container">
+    <div class="row">
+    	<div class="col-lg-4">
+            <div class="nav nav-pills faq-nav" id="faq-tabs" role="tablist" aria-orientation="vertical">
+                <a href="#tab1" class="nav-link active" data-toggle="pill" role="tab" aria-controls="tab1" aria-selected="true">
+                    <i class="mdi mdi-help-circle"></i>Preguntas
+                </a>
+                {% if app.User != null %}
+                <a href="#tab2" class="nav-link" data-toggle="pill" role="tab" aria-controls="tab2" aria-selected="false">
+                    <i class="mdi mdi-account"></i>Preguntas Internas
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="tab-content" id="faq-tab-content">
+                <div class="tab-pane show active" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                    <div class="accordion" id="accordion-tab-1">
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-1-heading-1">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-1-content-1" aria-expanded="false" aria-controls="accordion-tab-1-content-1">Qué es, quienes somos y de dónde viene la JAMONJUNTA?</button>
+                                </h5>
+                            </div>
+                            <div class="collapse show" id="accordion-tab-1-content-1" aria-labelledby="accordion-tab-1-heading-1" data-parent="#accordion-tab-1">
+                                <div class="card-body">
+                                    <p>Somos un grupo de personas con una pasión en común, forear mientras degustamos un jamón ibérico. La <strong>JAMONJUNTA</strong> nace de la unión de los shurs provenientes de este, nuestro foro, ForoCoches.com.</p><p> 
+                                    <p>Cada año nos reunimos para solicitar una propuesta a distintos proveedores del sector del jamón y en base a estas propuestas, mediante un proceso de votación decidimos que proveedor será el elegido para realizar nuestra conjunta.</p>
+                                    <p>Esta plataforma es la encargada de reunir las propuestas facilitadas por los proveedores, organizar las votaciones y facilitar el contacto directo entre proveedores y los participantes.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-1-heading-2">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-1-content-2" aria-expanded="false" aria-controls="accordion-tab-1-content-2">Qué objetivo tiene la JAMONJUNTA?</button>
+                                </h5>
+                            </div>
+                            <div class="collapse" id="accordion-tab-1-content-2" aria-labelledby="accordion-tab-1-heading-2" data-parent="#accordion-tab-1">
+                                <div class="card-body">
+                                    <p>El objetivo de la JAMONJUNTA es el de conseguir el mejor producto posible a un precio asequible para todos.</p><p>Del mismo modo que cualquiera de nosotros podría comprar un jamón en cualquier tienda, ya sea local físico o tienda online. También podemos decidir entre todos el comprar en un sitio único esperando recibir un trato más favorable que si lo hiciéramos de cualquier otro modo. Ya sea por un precio más ajustado, un lote de productos o algún tipo de ventaja.</p>
+                                    <p>Por supuesto, degustar uno de los mejores productos de nuestra tierra, el jamón ibérico.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-1-heading-3">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-1-content-3" aria-expanded="false" aria-controls="accordion-tab-1-content-3">Cada cuanto se organiza la JAMONJUNTA</button>
+                                </h5>
+                            </div>
+                            <div class="collapse" id="accordion-tab-1-content-3" aria-labelledby="accordion-tab-1-heading-3" data-parent="#accordion-tab-1">
+                                <div class="card-body">
+                                    <p>Depende de muchos factores, ya que cada año lo suele organizar una persona distinta, aunque es posible que algún año no se haya organizado, no obstante es una práctica que se lleva haciendo desde hace tiempo en la comunidad y esperemos que así sea por mucho tiempo.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-1-heading-4">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-1-content-4" aria-expanded="false" aria-controls="accordion-tab-1-content-4">Que ganas tú como proveedor?</button>
+                                </h5>
+                            </div>
+                            <div class="collapse" id="accordion-tab-1-content-4" aria-labelledby="accordion-tab-1-heading-4" data-parent="#accordion-tab-1">
+                                <div class="card-body">
+                                    <p>Aparte de las ventas que generes con esta conjunta, debes de tener en cuenta de que ForoCoches es una de las comunidades más grandes de España y de los foros más grandes del mundo. Con un tráfico de veinte a cuarenta mil usuarios simultáneos en la plataforma y alrededor de un millón de usuarios registrados, por lo que las recomendaciones de unos y otros es algo habitual en esta, nuestra comunidad.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-1-heading-5">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-1-content-5" aria-expanded="false" aria-controls="accordion-tab-1-content-5">Cuantos usuarios hay en la JAMONJUNTA y como puedo contactar con el organizador?</button>
+                                </h5>
+                            </div>
+                            <div class="collapse" id="accordion-tab-1-content-5" aria-labelledby="accordion-tab-1-heading-5" data-parent="#accordion-tab-1">
+                                <div class="card-body">
+                                    <p>En la actualidad hay 328 usuarios confirmados, registrados y activos. Para contactar con el organizador de la plataforma, tienes a tu disposición el siguiente correo: </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-1-heading-6">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-1-content-6" aria-expanded="false" aria-controls="accordion-tab-1-content-6">Soy proveedor y quiero participar, que debo hacer?</button>
+                                </h5>
+                            </div>
+                            <div class="collapse" id="accordion-tab-1-content-6" aria-labelledby="accordion-tab-1-heading-6" data-parent="#accordion-tab-1">
+                                <div class="card-body">
+                                    <p>En el punto anterior encontrarás un correo de contacto para enviar tu propuesta. En cualquier caso te recomendados que sigas las siguientes directrices:</p>
+                                    <ul>
+                                    <li>Envío de los productos y precios acorde a la propuesta. Si nos envías los mismos productos/precios que podemos ver en tu web la gente no se lo tome de forma "sería".</li>
+                                    <li>Enviar una pequeña descripción de la empresa y productos.</li>
+                                    <li>Preferiblemente la gente suele preferir lotes a productos, con esto quiero referirme a que es más probable que gane un proveedor con varios lotes a uno que solo ofrece productos sueltos.</li>
+                                    <li>A dónde realizas los envíos, debes tener en cuenta que somos particulares de toda España por lo que deberás asumir las gestiones para realizar los envíos a 150 puntos distintos, independientemente de si los portes van incluidos o no. Además una buena respuesta sería indicar si se envían a Canarias, Baleares o territorio Europeo.</li>
+                                    </ul>
+                                    <a href="https://www.forocoches.com/foro/showthread.php?t=6816239">Haciendo click aquí, podrás ver el hilo de la conjunta en Forocoches.com para hacer seguimiento del hilo.</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if app.User != null %}
+                <div class="tab-pane" id="tab2" role="tabpanel" aria-labelledby="tab2">
+                    <div class="accordion" id="accordion-tab-2">
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-2-heading-1">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-2-content-1" aria-expanded="false" aria-controls="accordion-tab-2-content-1">Derechos del forista</button>
+                                </h5>
+                            </div>
+                            <div class="collapse show" id="accordion-tab-2-content-1" aria-labelledby="accordion-tab-2-heading-1" data-parent="#accordion-tab-2">
+                                <div class="card-body">
+                                    <p>Como participante de la plataforma tienes derecho a poder participar / dejar de participar siempre que quieras y por el motivo que sea, siempre y cuando este dentro el período de participación. Del mismo modo también a opinar libremente de un proveedor, recomendar y proponer. Así como a ejercer tu derecho a voto llegado el momento.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-2-heading-2">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-2-content-2" aria-expanded="false" aria-controls="accordion-tab-2-content-2">Que se espera del forista?</button>
+                                </h5>
+                            </div>
+                            <div class="collapse" id="accordion-tab-2-content-2" aria-labelledby="accordion-tab-2-heading-2" data-parent="#accordion-tab-2">
+                                <div class="card-body">
+                                    <p>No guardas ningún deber con esta conjunta, aunque como mínimo se espera un punto de seriedad, debes de pensar que para organizar todo esto hay muchos implicados y precisamente en plena campaña navideña, para los propios proveedores es un faenón "extra" que no todos están dispuestos a asumir.</p>
+                                    <p>De modo que, si te apuntas a la conjunta, se espera que compres el producto, en caso contrario estarías perjudicando al resto de compañeros que si quieren comprar el producto y esto podría repercutir en el precio final del mismo o incluso la cancelación de la oferta.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-2-heading-3">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-2-content-3" aria-expanded="false" aria-controls="accordion-tab-2-content-3">Qué puedo hacer para ayudar a la plataforma?</button>
+                                </h5>
+                            </div>
+                            <div class="collapse" id="accordion-tab-2-content-3" aria-labelledby="accordion-tab-2-heading-3" data-parent="#accordion-tab-2">
+                                <div class="card-body">
+                                	<p>Si conoces algún establecimiento y crees que podrían estar interesados, no dudes en contactar con ellos en nombre de todos nosotros. Cuántas más propuestas tengamos, probablemente más bajo será el precio y de mayor calidad, como es evidente la competencia es buena para el consumidor.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-2-heading-4">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-2-content-4" aria-expanded="false" aria-controls="accordion-tab-2-content-4">Quién es el organizador y por qué debería fiarme de él?</button>
+                                </h5>
+                            </div>
+                            <div class="collapse" id="accordion-tab-2-content-4" aria-labelledby="accordion-tab-2-heading-4" data-parent="#accordion-tab-2">
+                                <div class="card-body">
+                                    <p>Como ya dije en el foro, mi nombre es Víctor y soy informático, administrador de sistemas para ser más concreto. La única relación que guardo con los jamones es la misma que todos vosotros, culinaria. Soy un piraña y siempre que puedo tengo un jamón en casa.</p>
+                                    <p>En cualquier caso, ni tengo trato con proveedores ni sabría distinguir si un jamón es más bueno que otro salvo por la obviedad del etiquetado del mismo y algo que os puedo confirmar es que tampoco busco un trato de favor personal, compraré mis dos jamones (uno lo regalaré a mi hermana) como todos vosotros.</p>
+                                    <p>¿Quizá te preguntes... “- ¿Entonces por qué cojones organizas la conjunta, si no sabes torear pa qué te metes?". Como comenté en el foro, estábamos a día 9 de noviembre y nadie había montado nada, algo inadmisible bajo mi punto de vista.</p>
+                                    <p>No os puedo garantizar que la conjunta sea perfecta, pero para ello tenemos gente en el hilo dispuesta a darnos su punto de vista de experto en matería y entre todos ayudarnos hasta conseguir nuestro glorioso jamón.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-2-heading-5">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-2-content-5" aria-expanded="false" aria-controls="accordion-tab-2-content-5">Qué precio es el habitual, envían a Canarias o fuera de España?</button>
+                                </h5>
+                            </div>
+                            <div class="collapse" id="accordion-tab-2-content-5" aria-labelledby="accordion-tab-2-heading-5" data-parent="#accordion-tab-2">
+                                <div class="card-body">
+                                    <p>Por norma general, el precio suele rondar entre los 200€ y los 350€, todo depende de los productos que selecciones, también es posible bajar de este precio, por ejemplo, hay paletillas por 100€ o 110€.</p>
+                                    <p>En relación a los envíos, prácticamente todos los proveedores suelen enviar a cualquier punto de España y de forma menos usual a cualquier punto de Europa. No obstante, en caso de salir un proveedor que no envíe a los sitios mencionados anteriormente. Yo me comprometo a recibir el pedido y enviarlo a cualquier parte del mundo que el shur solicite, eso sí, todos los gastos a cargo del el mismo.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="accordion-tab-2-heading-6">
+                                <h5>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#accordion-tab-2-content-6" aria-expanded="false" aria-controls="accordion-tab-2-content-6">Sugerencias y gracias</button>
+                                </h5>
+                            </div>
+                            <div class="collapse" id="accordion-tab-2-content-6" aria-labelledby="accordion-tab-2-heading-6" data-parent="#accordion-tab-2">
+                                <div class="card-body">
+                                    <p>Si tienes cualquier sugerencia puedes enviarme un MP a <strong>@VFoxtTroT</strong>.</p><p>También quiero dar las gracias a los shurs que me han ayudado con propuestas y dudas:</p>
+                                    <ul>
+                                    	<li><strong>@MaidenKun</strong></li>
+                                    	<li><strong>@ElArriacense</strong></li>
+                                    	<li><strong>@MasterSlicer</strong></li>
+                                    	<li><strong>@seevm</strong></li>                                    		
+                                    </ul>
+                                    <p>Y a toda la gente que se ha ofrecido a ayudar, ya sea dando su opinión, contactando con proveedores, respondiendo dudas o dando referencias de proveedores.</p>
+                                    <p>Todavía queda mucho trabajo, mi intención es tener por lo menos 10 ofertas de distintos proveedores, es algo difícil, pero espero conseguirlo. Aunque tampoco quiero demorar mucho más tiempo los pedidos ya que se acerca diciembre y es peligroso para la conjunta.</p>
+                                    <p>Nos vemos por el forro.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Poll index{% endblock %}
+
+{% block body %}
+    <!--
+    <h1>Qué proveedor será el ganador de la conjunta?</h1>
+    <p>Antes de votar, revisa todas las ofertas ya que una vez votado, no podrás cambiar tu voto.</p>
+    <table class="table">
+        {% for message in app.flashes('error') %}
+    <div class="flash-notice">
+        {{ message }}
+    </div>
+{% endfor %}
+        <thead>
+            <tr>
+                <th>Proveedor</th>
+                <th>Votos actuales</th>
+                <th>Votar</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for poll in polls %}
+            <tr>
+                <td>{{ poll.name }}</td>
+                <td>{{ poll.votes }}</td>
+                <td>
+                <a href="{{ path('poll_vote', {'id': poll.id}) }}"><button type="button" class="btn btn-primary">Votar</button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <p>Las votaciones terminarán en: <span id="countdown"></span><p>
+     -->
+    <img src="https://cdn.lajamonjunta.online/resultados.jpg">
+<script>
+var end = new Date('11/26/2018 10:00 PM');
+
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+
+    function showRemaining() {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0) {
+
+            clearInterval(timer);
+            document.getElementById('countdown').innerHTML = 'EXPIRED!';
+
+            return;
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+
+        document.getElementById('countdown').innerHTML = days + ' dias, ';
+        document.getElementById('countdown').innerHTML += hours + ' horas, ';
+        document.getElementById('countdown').innerHTML += minutes + ' minutos y ';
+        document.getElementById('countdown').innerHTML += seconds + ' segundos';
+    }
+
+    timer = setInterval(showRemaining, 1000);
+</script>
+{% endblock %}

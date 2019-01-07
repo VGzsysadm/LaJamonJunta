@@ -1,0 +1,12 @@
+.submit-hardware{
+    margin-top: 20px;
+    margin-left: 6px;
+    width: 35%;
+    float: right;
+}
+#hardware-table{
+    font-size: 0.625rem !important;
+}
+.delete-hardware{
+     margin-left: 0px;
+ }

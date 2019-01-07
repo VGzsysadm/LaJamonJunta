@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}Reset your password{% endblock %}
+{% block body %}
+    <table class="table">
+        <tbody>
+        <a class="btn btn-outline-primary" style="float: right;margin-bottom:10px;" href="{{ path('edit_password', {'id': app.user.id}) }}"><i class="material-icons">add_circle_outline</i>Edit my profile</a>
+        <tr>
+            <th>Password</th>
+            <td>{{ app.user.password }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
