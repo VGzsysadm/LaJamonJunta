@@ -1,6 +1,6 @@
 # LaJamonJunta
 
-Conjunta de jamones para Forocoches.
+<center>Conjunta de jamones para Forocoches</center>
 
 ![Alt text](public/jamonjunta.jpg?raw=true "LaJamonJunta")
 
