@@ -15,7 +15,7 @@
 Clone the project
 
 ```
-git clone https://github.com/VGzsysadm/Inventory-app.git
+https://github.com/VGzsysadm/LaJamonJunta.git
 ```
 ### Installing
 
