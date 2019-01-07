@@ -1,6 +1,7 @@
 # LaJamonJunta
 
 Conjunta de jamones para Forocoches.
+![Alt text](public/jamonjunta.jpg?raw=true "LaJamonJunta")
 
 ### Prerequisites
 
