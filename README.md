@@ -61,11 +61,11 @@ Apache2 site
         ErrorLog /var/log/apache2/JAMONJUNTA/project_error.log
         CustomLog /var/log/apache2/JAMONJUNTA/project_access.log combined
         SSLEngine on
-        SSLCertificateFile /etc/letsencrypt/live/lajamonjunta.online/cert.pem
-        SSLCertificateKeyFile //etc/letsencrypt/live/lajamonjunta.online/privkey                                                                                     .pem
-        SSLCertificateChainFile /etc/letsencrypt/live/lajamonjunta.online/fullch                                                                                     ain.pem
+        SSLCertificateFile AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        SSLCertificateKeyFile AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        SSLCertificateChainFile AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         SetEnv APP_ENV prod
-        SetEnv APP_SECRET 64732cb97c775c6cc0e480593ca9edfca2a7aad3
+        SetEnv APP_SECRET AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </VirtualHost>
 <IfModule mod_headers.c>
         Header always add Strict-Transport-Security "max-age=15768000; includeSu                                                                                     bDomains; preload"
