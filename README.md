@@ -23,9 +23,9 @@ Install dependencies
 cd Inventory-app
 composer install
 ```
-### Prodc mode
+### Prod mode
 
-Modify .env file with your database information.
+Create ENV variables in the host, confirm data at doctrine.yaml
 
 Create the database and tables:
 
