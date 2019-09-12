@@ -46,7 +46,7 @@ php bin/console doctrine:schema:update --force
 
 ## Authors
 
-* **VGzsysadm** - *https://sysadm.es* - [@VGzsysadm](https://github.com/VGzsysadm)
+* **VGzsysadm** - *https://sysadm.es* - *https://consultoronline.cloud* [@VGzsysadm](https://github.com/VGzsysadm)
 
 ## License
 
