@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+<script>
+    CKEDITOR.replace( 'post[posted]' );
+</script>
+{% endblock %}
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('post_index')}}">{% trans %}Post{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('post_show', {'id': post.id}) }}">{{ post.tittle}}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('post_edit', {'id': post.id}) }}">{% trans %}Editar post{% endtrans %}</a></li>
+  </ol>
+</nav>
+<br>
+
+    {{ include('post/_form.html.twig', {'button_label': 'Update'}) }}
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('notifications-activity') }}">{% trans %}Notificaciones{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('notifications-activity') }}">{% trans %}Actividad{% endtrans %}</a></li>
+  </ol>
+</nav>
+<br>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item active"><a href="{{ path('notifications-activity') }}">{% trans %}Actividad{% endtrans %}</a></li>
+            <li class="list-group-item"><a href="{{ path('notifications-comments') }}">{% trans %}Comentarios{% endtrans %}</a></li>
+            <li class="list-group-item"><a href="{{ path('notifications-posts') }}">{% trans %}Mis Posts{% endtrans %}</a></li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+      
+      
+        <div class="col-md-12">
+                            <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> {% trans %}Última actividad{% endtrans %}</h4><span class="badge badge-primary">{% trans %}Total{% endtrans %}: {{ activities.getTotalItemCount }}</span>
+                            {% if activities.getTotalItemCount == 0 %}
+                            <p>{% trans %}No se han encontrado datos{% endtrans %}</p>
+                            {% endif %} 
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    {% for activity in activities %}
+                                        {% if activity.action == 1 %}                                    
+                                        <tr>
+                                            <td>
+                                                <strong>{% trans %}Has enviado{% endtrans %}</strong> {% trans %}un mensaje a {% endtrans %} <strong><a href="{{ path('profiles', {'id': activity.target.getId}) }}">{{ activity.target.getUsername}}</a> {% trans %}a las{% endtrans %}  {{ activity.timestamp|date("m/d/Y H:i")}}</strong>
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if activity.action == 2 %}                                    
+                                        <tr>
+                                            <td>
+                                                <p><strong>{% trans %}Has creado{% endtrans %}</strong> {% trans %}el proveedor{% endtrans %} <strong>{{ activity.provider.name}} {% trans %}a las{% endtrans %} {{ activity.timestamp|date("m/d/Y H:i")}}</strong>, {% trans %}notificación enviada a{% endtrans %} {{ activity.target.getUsername}}.</p>
+                                            </td>
+                                        </tr>
+                                        {% endif %} 
+                                    {% endfor %}  
+                                </tbody>
+                            </table>
+            </div>
+            <div class="navigation">{{ knp_pagination_render(activities) }}</div>
+
+
+    </div>
+  </div>
+</div>
+
+<br>
+{% endblock %}

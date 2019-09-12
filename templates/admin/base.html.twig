@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="JamonJunta, jamones, forocoches, conjunta, LaJamonJunta" />
+        <meta name="description" content="LaJamonJunta conjunta de jamones de forocoches, los mejores jamones." />
+        <meta name="subject" content="lajamonjunta.online" />
+        <meta name="copyright" content="lajamonjunta.online" />
+        <meta name="language" content="{{ app.request.getLocale() }}" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="revised" content="Viernes, 07 Junio 2019" />
+        <meta name="subject" content="LaJamonjunta conjunta de jamones" />
+        <meta name="Revisit-after" content="15 days" />
+        <meta name="viewport" content="initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
+        <!--Importando indice.css-->
+        <link rel="stylesheet" href="{{ asset('css/indice.css') }}">
+        {% block stylesheets %}
+        <style>
+        body {
+  font-size: .875rem;
+}
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 48px; /* Height of navbar */
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #999;
+}
+
+.sidebar .nav-link.active {
+  color: #007bff;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+/*
+ * Navbar
+ */
+
+.navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, .25);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .form-control {
+  padding: .75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.form-control-dark {
+  color: #fff;
+  background-color: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+/*
+ * Utilities
+ */
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+</style>
+        {% endblock %}
+    </head>
+    <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ path('indice') }}">Volver a LaJamonJunta</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <!--NAV-->
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column" style="margin-top:50px;">
+            <!--DASHBOARD-->
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ path('admin_dashboard') }}">
+                  <span data-feather="home"></span>
+                  Dashboard<span class="sr-only"></span>
+                </a>
+              </li>
+            <!--DASHBOARD END-->
+            <!--PROVIDERS-->
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ path('admin_providers') }}">
+                  <span data-feather="home"></span>
+                  Proveedores<span class="sr-only"></span>
+                </a>
+              </li>
+            <!--PROVIDERS END-->
+            <!--USERS-->
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ path('admin_users') }}">
+                  <span data-feather="home"></span>
+                  Usuarios <span class="sr-only"></span>
+                </a>
+              </li>
+            <!--USERS END-->
+            </ul>
+          </div>
+        </nav>
+        <!--NAV END-->
+    {% block body %}{% endblock %}
+        </div>
+    </div>
+    {{ include('admin/pie.html.twig') }}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>

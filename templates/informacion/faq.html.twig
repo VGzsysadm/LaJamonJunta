@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La Jamonjunta | FAQ{% endblock %}
+
+{% block body %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">Índice</a></li>
+    <li class="breadcrumb-item"><a href="">Información</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('faq') }}">Faq</a></li>
+  </ol>
+</nav>
+<h5 class="font-weight-bold">¿Qué es, quienes somos y de dónde viene la JAMONJUNTA?</h5>
+<p>Somos un grupo de personas con una pasión en común, forear mientras degustamos un jamón ibérico. La JAMONJUNTA nace de la unión de los shurs provenientes de este, nuestro foro, ForoCoches.com.</p>
+<p>Cada año nos reunimos para solicitar una propuesta a distintos proveedores del sector del jamón y en base a estas propuestas, mediante un proceso de votación decidimos que proveedor será el elegido para realizar nuestra conjunta.</p>
+<p>Esta plataforma es la encargada de reunir las propuestas facilitadas por los proveedores, organizar las votaciones y facilitar el contacto directo entre proveedores y los participantes.</p>
+
+<h5 class="font-weight-bold">¿Qué objetivo tiene la JAMONJUNTA?</h5>
+<p>El objetivo de la JAMONJUNTA es el de conseguir el mejor producto posible a un precio asequible para todos.</p>
+<p>Del mismo modo que cualquiera de nosotros podría comprar un jamón en cualquier tienda, ya sea local físico o tienda online. También podemos decidir entre todos el comprar en un sitio único esperando recibir un trato más favorable que si lo hiciéramos de cualquier otro modo. Ya sea por un precio más ajustado, un lote de productos o algún tipo de ventaja.</p>
+<p>Por supuesto, degustar uno de los mejores productos de nuestra tierra, el jamón ibérico.</p>
+
+<h5 class="font-weight-bold">¿Cada cuánto se organiza la JAMONJUNTA?</h5>
+<p>Depende de muchos factores, ya que cada año lo suele organizar una persona distinta, aunque es posible que algún año no se haya organizado, no obstante es una práctica que se lleva haciendo desde hace tiempo en la comunidad y esperemos que así sea por mucho tiempo.</p>
+
+<h5 class="font-weight-bold">¿Cuántos usuarios hay en la JAMONJUNTA?</h5>
+<p>En la actualidad hay {{users}} usuarios activos en la plataforma.</p>
+
+<h5 class="font-weight-bold">LaJamonjunta 2018</h5>
+<p>En la jamonjunta 2018 se generó un volumen total de ventas entre los 20.000€ y los 30.000€ repartido entre los dos proveedores que ganaron el concurso.</p>
+<ul>
+  <li>
+  encinaresdelsur.com
+  </li>
+  <li>
+  chorizoyjamon.com
+  </li>
+</ul>
+<p>Participaron un total de 326 personas ( alrededor de 600 usuarios registrados ), llegando a comprar algún producto entre 110 y 130 personas.</p>
+
+<h5 class="font-weight-bold">¿Por qué tengo que registrarme con un email válido?</h5>
+<p>El motivo por el que se debe de poner un email válido es muy simple, en la conjunta 2018 cada dos por tres los encargados de administrar la plataforma debíamos andar restableciendo contraseñas y recordando usuarios para poder acceder, esto generaba un volumen de atención muy grande</p>
+<p>Ahora mismo hay un email, y se puede restablecer la contraseña a través de tu email, del mismo modo que recordar el usuario.</p>
+
+<h5 class="font-weight-bold">¿Y las contraseñas?, como sé que no me vas a churrear?</h5>
+<p>Es muy simple, si no estás seguro es tan fácil como poner otra contraseña. No obstante, la plataforma está hecha en el framework de PHP Symfony 4. Y utiliza el cifrado Blowfish con la función de hash argon2. En resumen, lo que se guarda en la base de datos es un hash verificatorio, ni se guarda tu contraseña cifrada, ni sin cifrar. Puedes comprobarlo en tu perfil</p>
+{% endblock %}

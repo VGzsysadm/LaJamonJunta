@@ -1,0 +1,84 @@
+.main-collage {
+    margin: 1em;
+}
+
+.navigation {
+    margin-top: 1em;
+}
+
+.main-collage img {
+    max-width: 40em;
+    max-height: 30em;
+    background-color: #000!important;
+    opacity: 0.6;
+    z-index: 0;
+}
+
+
+/* Profile page */
+
+.profile {
+    display: table;
+    margin: auto;
+}
+
+.avatarization {
+    margin: 1em;
+}
+
+footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: none;
+}
+
+li a {
+    color: inherit;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+@media screen and (min-width: 992px) {
+    .notifications {
+        width: 350px!important;
+    }
+}
+
+#pig-nation {
+    position: fixed;
+    z-index: 100;
+}
+
+.pig-img {
+    bottom: 10px;
+    width: 50%;
+    object-fit: none;
+    object-position: 80% -160%;
+    width: 300px;
+    height: 500px;
+}
+
+.cookie-text p {
+    background-color: #6351CE;
+    border-width: 50px 200px 50px 0;
+}
+
+@media screen and (min-width: 798px) {
+    .cookie-paragraf {
+        border-radius: 5px;
+        color: Black;
+        padding: 10px;
+        margin-top: 45%;
+    }
+}
+
+@media screen and (max-width: 798px) {
+    .cookie-paragraf {
+        border-radius: 5px;
+        color: Black;
+        padding: 20px;
+    }
+}

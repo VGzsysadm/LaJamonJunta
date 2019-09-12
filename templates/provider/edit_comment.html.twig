@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+<script>
+    CKEDITOR.replace( 'ocomment[description]' );
+</script>
+{% endblock %}
+
+{% block body %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('provider') }}">{% trans %}Proveedores{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('show_provider', {'id': ocomment.getProvider.id}) }}">{{ocomment.getProvider.name}}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('ocomment_edit', {'id': ocomment.getId}) }}">{% trans %}Editar Comentario{% endtrans %}</a></li>
+  </ol>
+</nav>
+<div class="col text-center">
+                                {{ form_start(form) }}
+                                {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+                                <div class="col text-center">
+                                <a class="btn btn-secondary" href="{{ path('show_provider', {'id': ocomment.getProvider.getId }) }}">{% trans %}Volver{% endtrans %}</a>
+                                <input type="submit" class="btn btn-primary avatarization mx-auto" name="btnAddMore" value="Guardar"/>
+                                </div>
+                                {{ form_end(form) }}
+</div>
+{% endblock %}

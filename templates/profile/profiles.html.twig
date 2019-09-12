@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('get_users') }}">{% trans %}Perfiles{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('profiles', {'id': user.id}) }}">{% trans %}Perfil de{% endtrans %} {{ user.username }}</a></li>
+  </ol>
+</nav>
+<br>
+		<div class="profile-content">
+            <div class="container">
+                <div class="row">
+	                <div class="col">
+        	           <div class="profile">
+	                        <div class="avatar">
+                            <div class="col text-center">
+                                <label for="file-input">
+	                                <img src="{{ asset('uploads/avatar/') }}{{ user.getProfile.avatar }}" width="300" height="300" alt="Circle Image" class="rounded-circle img-fluid">
+                                </label>
+                            </div>
+	                        </div>
+	                        <div class="name">
+	                            <h3 class="title text-center"><a href="{{ path('profiles', {'id': user.id}) }}">{{ user.username }}</a></h3>
+	                        </div>
+	                    </div>
+    	            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content p-b-3">
+                <div class="tab-pane active" id="profile">
+                    <h4 class="m-y-2">{% trans %}Perfil público{% endtrans %}</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% if user.getHierarchy.score in range(0, 29) %}
+                            <h6><i class="far fa-star-half fa-2x"></i> Rango</h6>
+                            <p>
+                                Jamonero ocasional
+                            </p>
+                            {% endif %}
+                            {% if user.getHierarchy.score in range(30, 99) %}
+                            <h6><i class="far fa-star fa-2x"></i> Rango</h6>
+                            <p>
+                                Degustador de Jamones
+                            </p>
+                            {% endif %}
+                            {% if user.getHierarchy.score in range(100, 399) %}
+                            <h6><i class="fas fa-star-half-alt fa-2x"></i> Rango</h6>
+                            <p>
+                                Gran catador
+                            </p>
+                            {% endif %}
+                            {% if user.getHierarchy.score in range(400, 599) %}
+                            <h6><i class="fas fa-star fa-2x"></i> Rango</h6>
+                            <p>
+                                Jamón de bastos
+                            </p>
+                            {% endif %}
+                            {% if user.getHierarchy.score in range(600, 999) %}
+                            <h6><i class="fas fa-medal fa-2x"></i> Rango</h6>
+                            <p>
+                                Experto en la Montanera
+                            </p>
+                            {% endif %}
+                            {% if user.getHierarchy.score >= 1000 %}
+                            <h6><i class="fas fa-jedi fa-2x"></i> Rango</h6>
+                            <p>
+                                Rey de la dehesa
+                            </p>
+                            {% endif %}
+                            <h6>Fecha de registro</h6>
+                            <p>
+                                <i class="fas fa-calendar-week"></i> {{ user.getProfile.registration|date('Y-m-d H:i:s') }}
+                            </p>
+                            <h6>Último acceso</h6>
+                            <p>
+                                <i class="fas fa-info-circle"></i> {{ user.getProfile.lastlogin|date('Y-m-d H:i:s') }}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-medal"></i> {% trans %}Premios{% endtrans %}</h6>
+                            {% if user.getAward.trophy == 0 or null %}
+                            <p class="tag tag-default tag-pill"><strong>Sin premios</strong></p>
+                            {% endif %}
+                            {% if user.getAward.trophy == 1 %}
+                            <p class="tag tag-default tag-pill"><strong>Colaborador</strong></p>
+                            {% endif %}
+                            {% if user.getAward.trophy == 2 %}
+                            <p class="tag tag-default tag-pill"><strong>Gran colaborador</strong></p>
+                            {% endif %}
+                            {% if user.getAward.trophy == 3 %}
+                            <p class="tag tag-default tag-pill"><strong>Oficial</strong></p>
+                            {% endif %}
+                            {% if user.getAward.trophy >= 4 %}
+                            <p class="tag tag-default tag-pill"><strong>Heroe</strong></p>
+                            {% endif %}
+                            <hr>
+                            {% if user.getHierarchy.score == 0 or null %}
+                            <span class="tag tag-primary"><i class="fas fa-trophy"></i> {% trans %}Sin puntos{% endtrans %}</span>
+                            {% endif %}
+                            {% if user.getHierarchy.score > 0 %}
+                            <span class="tag tag-primary"><i class="fas fa-trophy"></i> {{ user.getHierarchy.score }} {% trans %}puntos{% endtrans %}</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-12">
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <input type="submit" class="btn btn-primary avatarization mx-auto" name="btnAddMore" value="Enviar comentario"/>
+                        {{ form_end(form) }}
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> {% trans %}Última actividad{% endtrans %}</h4>
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    {% if activities == null %} 
+                                    <tr>
+                                        <td>
+                                            <strong>{% trans %}No hay actividad.{% endtrans %}</strong>
+                                        </td>
+                                    </tr>
+                                    {% endif %} 
+                                    {% for activity in activities %}
+                                        {% if activity.action == 1 %}                                    
+                                        <tr>
+                                            <td>
+                                                <strong>{% trans %}Has enviado{% endtrans %}</strong> {% trans %}un mensaje a {% endtrans %} <strong><a href="{{ path('profiles', {'id': activity.target.getId}) }}">{{ activity.target.getUsername}}</a> {% trans %}a las{% endtrans %} {{ activity.timestamp|date("m/d/Y H:i")}}</strong>
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if activity.action == 2 %}                                    
+                                        <tr>
+                                            <td>
+                                                 <p><strong>{% trans %}Has creado{% endtrans %}</strong> {% trans %}el proveedor{% endtrans %} <strong>{{ activity.provider.name}} {% trans %}a las{% endtrans %} {{ activity.timestamp|date("m/d/Y H:i")}}</strong>, {% trans %}notificación enviada a{% endtrans %} {{ activity.target.getUsername}}.</p>
+                                            </td>
+                                        </tr>
+                                        {% endif %} 
+                                    {% endfor %}  
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-md-12">
+                            <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> {% trans %}Últimos comentarios{% endtrans %}</h4>
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                {% if comments == null %} 
+                                <tr>
+                                        <td>
+                                            <strong>{% trans %}No hay comentarios{% endtrans %}.</strong>
+                                        </td>
+                                    </tr>
+                                {% endif %}   
+                                {% for comment in comments %}
+                                    {% if comment.user.getAward.trophy > 4 %}
+                                        <tr class="hero">
+                                        <td>
+                                            <a href="{{ path('profiles', {'id': comment.user.getId}) }}"><strong>{{ comment.user.username}}</strong></a>: {{ comment.message}} <strong> {% trans %}a las{% endtrans %} {{ comment.timestamp|date("m/d/Y H:i")}}</strong><i class="fas fa-jedi fa-2x float-right"></i>
+                                        </td>
+                                    </tr>
+                                    {% endif %}                                 
+                                    {% if comment.user.getAward.trophy < 4 %}
+                                        <tr>
+                                        <td>
+                                            <a href="{{ path('profiles', {'id': comment.user.getId}) }}"><strong>{{ comment.user.username}}</strong></a>: {{ comment.message}} <strong> {% trans %}a las{% endtrans %} {{ comment.timestamp|date("m/d/Y H:i")}}</strong>
+                                        </td>
+                                    </tr>
+                                    {% endif %}  
+                                {% endfor %}  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+            </div>
+{% endblock %}

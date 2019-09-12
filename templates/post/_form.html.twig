@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+    <div class="col text-center">
+    {{ form_label(form.tittle, 'Introduce un título') }}
+    </div>
+    {{ form_widget(form.tittle, {'attr': {'class': 'form-control'}}) }}
+    <br>
+    {{ form_widget(form.posted) }}
+    <div class="col text-center">
+        <a class="btn btn-secondary" href="{{ path('post_index')}}">Volver</a>
+        <input type="submit" class="btn btn-primary avatarization mx-auto" name="btnAddMore" value="Guardar"/>
+    </div>
+{{ form_end(form) }}

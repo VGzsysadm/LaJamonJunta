@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+<script>
+    CKEDITOR.replace( 'provider[description]' );
+</script>
+{% endblock %}
+
+{% block body %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('provider') }}">{% trans %}Proveedores{% endtrans %}</a></li>
+  </ol>
+</nav>
+<div class="col text-center">
+                                {{ form_start(form) }}
+                                {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_row(form.location, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_row(form.state, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_row(form.web, {'attr': {'class': 'form-control'}}) }}
+                                <br><small>{% trans %}Imagen descriptiva de la empresa{% endtrans %}</small>
+                                {{ form_row(form.picture, {'attr': {'class': 'form-control'}}) }}
+                                <br><small>{% trans %}Documento pdf en caso de tener{% endtrans %}</small>
+                                {{ form_row(form.documentone, {'attr': {'class': 'form-control'}}) }}
+                                <div class="col text-center">
+                                <a class="btn btn-secondary" href="{{ path('profile', {'id': app.user.id}) }}">{% trans %}Volver{% endtrans %}</a>
+                                <input type="submit" class="btn btn-primary avatarization mx-auto" name="btnAddMore" value="Guardar"/>
+                                </div>
+                                {{ form_end(form) }}
+</div>
+{% endblock %}

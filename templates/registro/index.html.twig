@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('registro') }}">{% trans %}Registro{% endtrans %}</a></li>
+  </ol>
+</nav>
+<div class="container">
+    <div class="row justify-content-md-center">
+    <div class="col-md-auto">
+    {{ form_start(form, { 'attr': {'class': 'form-signin disabled'} }) }}
+    <p class="text-center"><small class="text-muted">{% trans %}Atención, el usuario es un dato publico.{% endtrans %}</small></p></a>
+    {{ form_row(form.username, {'label':false}) }}
+    {{ form_row(form.email, {'label':false}) }}
+    {{ form_row(form.plainPassword.first, {'label':false}) }}
+    {{ form_row(form.plainPassword.second, {'label':false}) }}
+    {{ form_row(form.termsAccepted, {'label':false}) }}
+    <p class="terms">{% trans %}Acepto la política de privacidad.{% endtrans %}</p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans %}Registrar{% endtrans %}</button>
+    {{ form_end(form) }}
+    </div>
+    </div>
+</div>
+<br>
+{% endblock %}

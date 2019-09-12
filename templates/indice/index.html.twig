@@ -1,0 +1,165 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<style>
+.card-body a{
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+  </ol>
+</nav>
+{% if app.user == null %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-lg-6">
+                        <div class="card bg-dark text-white main-collage">
+                        <img src="{{ asset('img/1.jpg') }}" class="card-img" alt="grid-images">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                            <p class="card-text"></p>
+                        </div>
+                        </div>
+    </div>
+    <div class="col-md-6 col-lg-6">
+                        <div class="card bg-dark text-white main-collage">
+                        <img src="{{ asset('img/2.jpg') }}" class="card-img" alt="grid-images">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                            <p class="card-text"></p>
+                        </div>
+                        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-lg-4">
+                        <div class="card bg-dark text-white main-collage">
+                        <img src="{{ asset('img/3.jpg') }}" class="card-img" alt="grid-images">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                        </div>
+                        </div>
+    </div>
+    <div class="col-md-4 col-lg-4">
+                        <div class="card bg-dark text-white main-collage">
+                        <img src="{{ asset('img/4.jpg') }}" class="card-img" alt="grid-images">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                        </div>
+                        </div>
+    </div>
+    <div class="col-md-4 col-lg-4">
+                        <div class="card bg-dark text-white main-collage">
+                        <img src="{{ asset('img/5.jpg') }}" class="card-img" alt="grid-images">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                        </div>
+                        </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<!-- start -->
+<div class="container">
+<!-- start row -->
+  <div class="row">
+  {% for provider in providers6 %}
+    <div class="col-md-6 col-lg-6"> 
+          <div class="card bg-dark text-white main-collage">
+            <img class="card-img-top img-fluid" src="{{ asset('uploads/documents/') }}{{ provider.picture }}" alt="Provider image cap">
+            <div class="card-body">
+            <a href="{{ path('show_provider', {'id': provider.id}) }}"><p class="card-text">{{ provider.name }}</p></a>
+            </div>
+          </div>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- end row -->
+  <!-- start row -->
+  <div class="row">
+      {% for provider in providers3 %}
+    <div class="col-md-4 col-lg-4"> 
+          <div class="card bg-dark text-white main-collage">
+            <img class="card-img-top img-fluid" src="{{ asset('uploads/documents/') }}{{ provider.picture }}" alt="Provider image cap">
+            <div class="card-body">
+            <a href="{{ path('show_provider', {'id': provider.id}) }}"><p class="card-text">{{ provider.name }}</p></a>
+            </div>
+          </div>
+    </div>
+    {% endfor %}
+  </div>
+<!-- end row -->
+</div>
+{% endif %}
+<!-- Checking nulls -->
+{% if app.user != null %}
+{% if providers6 == null and providers3 == null %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-lg-6">
+                        <div class="card bg-dark text-white main-collage">
+                        <img src="{{ asset('img/1.jpg') }}" class="card-img" alt="...">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                            <p class="card-text"></p>
+                        </div>
+                        </div>
+    </div>
+    <div class="col-md-6 col-lg-6">
+                        <div class="card bg-dark text-white main-collage">
+                        <img src="{{ asset('img/2.jpg') }}" class="card-img" alt="...">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                            <p class="card-text"></p>
+                        </div>
+                        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-lg-4">
+                        <div class="card bg-dark text-white main-collage">
+                        <img src="{{ asset('img/3.jpg') }}" class="card-img" alt="...">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                        </div>
+                        </div>
+    </div>
+    <div class="col-md-4 col-lg-4">
+                        <div class="card bg-dark text-white main-collage">
+                        <img src="{{ asset('img/4.jpg') }}" class="card-img" alt="...">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                        </div>
+                        </div>
+    </div>
+    <div class="col-md-4 col-lg-4">
+                        <div class="card bg-dark text-white main-collage">
+                        <img src="{{ asset('img/5.jpg') }}" class="card-img" alt="...">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                        </div>
+                        </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+<br>
+{% endblock %}

@@ -1,9 +1,14 @@
-index:
-    path: /
-    controller: App\Controller\SecurityController::login
-
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
 login_check:
     path: /login_check
 
 logout:
     path: /logout
+
+indice:
+    path:       /{_locale}/indice
+    controller: App\Controller\IndiceController::index
+    requirements:
+        _locale: es|ca|ba|va|eu|gl|oc

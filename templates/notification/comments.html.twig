@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NotificationController!{% endblock %}
+
+{% block body %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('notifications-activity') }}">{% trans %}Notificaciones{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('notifications-comments') }}">{% trans %}Comentarios{% endtrans %}</a></li>
+  </ol>
+</nav>
+<br>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{{ path('notifications-activity') }}">{% trans %}Actividad{% endtrans %}</a></li>
+            <li class="list-group-item active"><a href="{{ path('notifications-comments') }}">{% trans %}Comentarios{% endtrans %}</a></li>
+            <li class="list-group-item"><a href="{{ path('notifications-posts') }}">{% trans %}Mis Posts{% endtrans %}</a></li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+      
+      
+        <div class="col-md-12">
+                            <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> {% trans %}Últimos comentarios{% endtrans %}</h4><span class="badge badge-primary">{% trans %}Total{% endtrans %}: {{ comments.getTotalItemCount }}</span>
+                            {% if comments.getTotalItemCount == 0 %}
+                            <p>{% trans %}No se han encontrado datos{% endtrans %}</p>
+                            {% endif %} 
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    {% for comment in comments %}
+                                    {% if comment.user.getAward.trophy > 4 %}
+                                        <tr class="hero">
+                                        <td>
+                                            <a href="{{ path('profiles', {'id': comment.user.getId}) }}"><strong>{{ comment.user.username}}</strong></a>: {{ comment.message}} <strong> {% trans %}a las{% endtrans %} {{ comment.timestamp|date("m/d/Y H:i")}}</strong><i class="fas fa-jedi fa-2x float-right"></i>
+                                        </td>
+                                    </tr>
+                                    {% endif %}                                 
+                                    {% if comment.user.getAward.trophy < 4 %}
+                                        <tr>
+                                        <td>
+                                            <a href="{{ path('profiles', {'id': comment.user.getId}) }}"><strong>{{ comment.user.username}}</strong></a>: {{ comment.message}} <strong> {% trans %}a las{% endtrans %} {{ comment.timestamp|date("m/d/Y H:i")}}</strong>
+                                        </td>
+                                    </tr>
+                                    {% endif %}  
+                                {% endfor %}  
+                                </tbody>
+                            </table>
+            </div>
+            <div class="navigation">{{ knp_pagination_render(comments) }}</div>
+
+
+    </div>
+  </div>
+</div>
+
+<br>
+{% endblock %}

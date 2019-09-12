@@ -1,0 +1,149 @@
+#Cabecera
+Acciones: Acciones
+Proveedores: Proveedores
+Nuevo Proveedor: Nuevo Proveedor
+Usuarios: Usuarios
+Mis proveedores: Mis proveedores
+Panel de Administración: Panel de Administración
+Perfil: Perfil
+Mi Perfil: Mi Perfil
+Restablecer contraseña: Restablecer contraseña
+Cerrar sesión: Cerrar sesión
+Notificaciones: Notificaciones
+Ver todas las notificaciones: Ver todas las notificaciones
+Registro: Registro
+Login: Login
+Posts: Posts
+Nuevo Post: Nuevo Post
+Nuevo post: Nuevo post
+Castellano: Castellano
+Catalán: Catalán
+Mallorquín: Mallorquín
+Valenciano: Valenciano
+Euskera: Euskera
+Gallego: Gallego
+Aranés: Aranés
+#Pie
+Las redes sociales a tomar por culo.: Las redes sociales a tomar por culo.
+Plataforma de compra conjunta de jamones organizada por usuarios de forocoches.: Plataforma de compra conjunta de jamones organizada por usuarios de forocoches.
+El cerdo: El cerdo
+Etiquetado de los cerdos: Etiquetado de los cerdos
+Crianza: Crianza
+La montanera: La montanera
+El secado: El secado
+Información: Información
+FAQ: FAQ
+Ser proveedor: Ser proveedor
+Participar: Participar
+Política de privacidad: Política de privacidad
+Hilo de forocoches: Hilo de forocoches
+#IndiceController
+Índice: Índice
+Contacto: Contacto
+#Login
+Recordar: Recordar
+Recuperar usuario: Recuperar usuario
+#Registro
+Usuario: Usuario
+Email: Email
+Contraseña: Contraseña
+Repetir contraseña: Repetir contraseña
+Acepto la política de privacidad.: Acepto la política de privacidad.
+Atención, el usuario es un dato publico.: Atención, el usuario es un dato público.
+Registrar: Registrar
+#ProviderControllerIndex
+Total Proveedores: Total Proveedores
+No hay proveedores: No hay proveedores
+Ver Proveedor: Ver proveedor
+#ProviderControllerShow
+Añadir oferta: Añadir oferta
+Presentado por: Presentado por
+Sin web: Sin web
+Documentos: Documentos
+Sin documentos adjuntos: Sin documentos adjuntos
+Editar oferta: Editar oferta
+Editar Comentario: Editar Comentario
+Editado: Editado
+Volver: Volver
+#ProviderControllerEditComment
+Description: Descripción
+#ProviderControllerNew
+Name: Nombre
+Location: Ubicación
+State: Província
+Web: Página web
+www.lajamonjunta.online: www.lajamonjunta.online
+Imagen descriptiva de la empresa: Imagen descriptiva de la empresa
+Documento pdf en caso de tener: Documento pdf en caso de tener
+#ProviderControllerEdit
+Editar Proveedor: Editar Proveedor
+En caso de existir imagen, debe subirla nuevamente.: En caso de existir imagen, debe subirla nuevamente.
+En caso de existir documento pdf, debe subirlo nuevamente.: En caso de existir documento pdf, debe subirlo nuevamente.
+#ProviderControllerOfferNew
+Imagen de la oferta en caso de que tenga.: Imagen de la oferta en caso de que tenga.
+#ProviderControllerOfferedit
+Editar Oferta: Editar oferta
+En caso de editar oferta, la imagen debe ser subida nuevamente.: En caso de editar oferta, la imagen debe ser subida nuevamente.
+#ProviderControllerMyproviders
+Proveedor: Proveedor
+Activado: Activado
+#PostControllerIndex
+Post: Post
+Post fijos: Post fijos
+No hay posts fijos.: No hay posts fijos.
+Ir al post: Ir al post
+Todos los posts fijos: Todos los posts fijos
+No hay posts.: No hay posts.
+Todos los posts: Todos los posts
+#PostControllerNew
+Introduce un título: Introduce un título
+#PostControllerEdit
+Fijar post: Fijar post
+Editar comentario: Editar comentario
+Are you sure you want to delete this item?: Estas seguro de que deseas eliminar el objeto?
+Borrar: Borrar
+Editar post: Editar post
+#AnalyticControllerUsers
+Analítica: Analítica
+Total: Total
+Rol: Rol
+Última vez activo: Última vez activo
+Administrador: Administrador
+#ProfileControllerMy
+Mi perfil: Mi perfil
+Editar: Editar
+Fecha de registro: Fecha de registro
+Último acceso: Último acceso
+Dirección IP: Dirección IP
+puntos: puntos
+Última actividad: Última actividad
+Has creado: Has creado
+el proveedor: el proveedor
+a las: a las
+notificación enviada a: notificación enviada a
+Últimos comentarios: Últimos comentarios
+#ProfileControllerPublic
+Perfiles: Perfiles
+Perfil de: Perfil de
+Perfil público: Perfil público
+Premios: Premios
+Añadir un comentario: Añadir un comentario
+#ProfileControllerPassword
+Password: Contraseña
+Repeat Password: Repetir contraseña
+Repeat password: Repetir contraseña
+#NotificationsControllerIndex
+Actividad: Actividad
+Comentarios: Comentarios
+Mis Posts: Mis Posts
+#ControllersTranslatorInterfaces
+El proveedor se ha creado correctamente, rellana las ofertas a través de Mis proveedores para que los administradores lo puedan validar.: El proveedor se ha creado correctamente, rellana las ofertas a través de Mis proveedores para que los administradores lo puedan validar.
+Se ha enviado un email a tu cuenta.: Se ha enviado un email a tu cuenta.
+La cuenta está deshabilitada.: La cuenta está deshabilitada.
+You account has been activated.: Tu cuenta ha sido activada.
+El email no existe en nuestra base de datos o es incorrecto.: El email no existe en nuestra base de datos o es incorrecto.
+Se ha enviado un email al correo.: Se ha enviado un email al correo.
+A new password has been sent to your email.: Se ha enviado una nueva contraseña a tu correo.
+#KNPPaginator
+Label_previous: Anterior
+Label_next: Siguiente

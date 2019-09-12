@@ -1,79 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="La JAMONJUNTA">
-    <meta name="author" content="VFoxtTroT - https://www.forocoches.com/foro/member.php?u=594302">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
-          integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
-          crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/base.css') }}">
-    {% block stylesheets %}{% endblock %}
-</head>
- <body onload="doSomething()"> 
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    {% with %}
-    {% set lang = app.user.lang|default ('en_EN') %}
-    <h5 class="my-0 mr-md-auto font-weight-normal">LA JAMONJUNTA</h5>
-    
-    {% if app.User != null %}
-    <p class="my-0 mr-md-auto font-weight-normal">Usuarios registrados y activos en la conjunta: 351 // <span class="font-weight-bold" style="color: blue;">YA SE PUEDEN REALIZAR LOS PEDIDOS</span></p>
-    {% endif %}
-    <nav class="my-2 my-md-0 mr-md-3">
-            {% if app.User != null %}
-            <a class="p-2 text-dark" href="{{ path('pedidos')}}">{% trans into lang %}<i class="material-icons">shopping_cart</i>Pedidos{% endtrans %}</a>
-            {% endif %}
-            <a class="p-2 text-dark" href="{{ path('faq')}}"><i class="material-icons">help</i>{% trans into lang %}FAQ{% endtrans %}</a>
-            {% if app.User != null %}
-            <a class="p-2 text-dark" href="{{ path('poll_public')}}"><i class="material-icons">touch_app</i>{% trans into lang %}Votar{% endtrans %}</a>
-            <a class="p-2 text-dark" href="{{ path('proveedores')}}"><i class="material-icons">assignment</i>{% trans into lang %}Proveedores{% endtrans %}</a>
-                <button class="btn btn-outline-primary" type="button" data-toggle="dropdown">{% trans into lang %}Hello{% endtrans %}!, {{ app.user.username }}<i class="material-icons">arrow_drop_down</i></button>    
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ path('profile')}}"><i class="material-icons">person</i>{% trans into lang %}My Profile{% endtrans %}</a></li>
-                <ul class="user-sub-menu">
-                    <li><a class="dropdown-item" href="{{ path('reset_password')}}"><i class="material-icons">vpn_key</i>{% trans into lang %}Reset Password{% endtrans %}</a></li>
-                </ul>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li><a class="dropdown-item" href="{{ path('settings')}}"><i class="material-icons">settings</i>{% trans into lang %}Settings{% endtrans %}</a></li>
-                    <li><a class="dropdown-item" href="{{ path('user_index')}}"><i class="material-icons">people</i>{% trans into lang %}Users{% endtrans %}</a></li>
-                {% else %}
-                {% endif %}
-                <li role="separator" class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{{ path('logout')}}"><i class="material-icons">https</i>{% trans into lang %}Log out{% endtrans %}</a></li>
-            </ul>
-        {% else %}
-            <a class="btn btn-outline-primary" href="{{ path('login')}}">{% trans into lang %}Login{% endtrans %}</a>
-            <a class="btn btn-outline-primary" href="{{ path('user_registration')}}">{% trans into lang %}Sing up{% endtrans %}</a>
-        {% endif %}
-    </nav>
-</div>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-97414428-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-97414428-3');
-</script>
-<div class="container">
-    {% for message in app.session.flashbag() .get('status') %}
-        <div class="alert alert-success">{{message}}</div>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}LaJamonjunta | 2019 {% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="JamonJunta, jamones, forocoches, conjunta, LaJamonJunta" />
+        <meta name="description" content="LaJamonJunta conjunta de jamones de forocoches, los mejores jamones." />
+        <meta name="subject" content="lajamonjunta.online" />
+        <meta name="copyright" content="lajamonjunta.online" />
+        <meta name="language" content="{{ app.request.getLocale() }}" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="revised" content="Viernes, 07 Junio 2019" />
+        <meta name="subject" content="LaJamonjunta conjunta de jamones" />
+        <meta name="Revisit-after" content="15 days" />
+        <meta name="viewport" content="initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <!--Importando indice.css-->
+        <link rel="stylesheet" href="{{ asset('css/indice.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/modes.scss') }}">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body id="modes">
+    <!-- Cookies  -->
+    <div id="pig-nation" style="display:none">
+        <div class="row">
+            <img class="pig-img" src="{{ asset('img/anipig.gif') }}" id="load_cookie"></a>
+            <div class="cookie-text">
+                <p class="cookie-paragraf"> Usamos cookies de terceros ( Google analytics ) y te informamos de ello. <br><button type="button" class="btn btn-primary" onclick="myCookie()">Entendido</button></p>
+            </div>
+        </div>
+    </div>
+    <!-- Cookies  END-->
+        {{ include('cabecera.html.twig') }}
+    {% for message in app.session.flashbag() .get('success') %}
+        <div class="alert alert-success err">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{ message }}</strong>
+        </div>
     {% endfor %}
-    {% block body %}{% endblock %}
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    {% block javascripts %}{% endblock %} 
-</div>
-{% endwith %}
-<!-- Modal dev test -->
-</body>
+    {% for message in app.session.flashbag() .get('danger') %}
+        <div class="alert alert-danger err">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{ message }}</strong>
+        </div>
+    {% endfor %}
+    <div class="container content">
+        {% block body %}{% endblock %}
+    </div>
+    {{ include('pie.html.twig') }}
+    <!-- Alert Modal -->
+    <div class="modal fade" id="alert-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Atención, léeme!.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Este año es muy importante la colaboración de todos a la hora de encontrar proveedor. Revisa la sección de Acciones>Proveedores y Post para encontrar las directrices a seguir para contactar con un proveedor.</p>
+            <p>Una vez tienes la oferta, puedes publicarla en el apartado de Proveedores, cuando un administrador revise que está correctamente rellenada, esta será pública para todos, en caso contrario te avisará a través de un comentario en tu perfil</p>
+            <p>Recuerda, cuantos más proveedores, ¡más probabilidades de sacar mejor precio!</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Entendido</button>
+            <a href="{{ path('provider') }}" class="btn btn-secondary">Llévame a los proveedores!</a>
+        </div>
+        </div>
+    </div>
+    </div>
+    <!-- Alert Modal -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+    <script src="{{ asset('js/modes.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
+    <script src="{{ asset('js/cookies.js') }}"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97414428-3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-97414428-3');
+    </script>
+    <script language = "javascript">  
+      $(document).ready(function(){   
+         $("#loadnotifications").one("click", function(event){  
+            $.ajax({  
+               url:        "{{ path('notification') }}",  
+               type:       'POST',   
+               dataType:   'json',
+               
+               success: function(data, status) {
+                if ( data.length != 0 ) {
+                    
+                  for(i = 0; i < data.length; i++) 
+                    {
+                        if ( data[i]['action'] == 1 ) {
+                            console.log(data);
+                            activity = data[i];  
+                            var e = $('<div class="media"><span class="badge badge-secondary">New</span><div class="media-body"><h5 class="mt-0">Nuevo Mensaje</h5><p>El usuario <span id = "username"></span> te ha dejado un comentario.<hr /></p></div></div>');
+                            
+                            $('#username', e).html(activity['username']);
+                            $('#notification').append(e);
+                        } else if ( data[i]['action'] == 2 ) {
+                            activity = data[i];
+                            var j = $('<div class="media"><span class="badge badge-secondary">New</span><div class="media-body"><h5 class="mt-0">Nuevo Mensaje</h5><p>Se ha añadido un proveedor por <span id = "username"></span>.<hr /></p></div></div>');
+                            $('#username', j).html(activity['username']);  
+                            $('#notification').append(j);
+                        }
+                     
+                    }
+                } else 
+                {
+                    $(".notification-empty").prepend('<p>No tienes notificaciones</p>');
+                    }  
+               },  
+               error : function(xhr, textStatus, errorThrown) {  
+                  alert('La petición ajax ha fallado.');  
+               }  
+            });  
+         });  
+      });
+   </script>
+   {% block javascripts %}
+   {% endblock %}
+    </body>
 </html>

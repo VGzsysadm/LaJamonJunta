@@ -1,9 +1,9 @@
 security:
     encoders:
       App\Entity\User:
-        algorithm: bcrypt
+        algorithm: auto
     providers:
-            our_db_provider:
+            databaseusers:
                 entity:
                     class: App\Entity\User
                     property: username
@@ -19,27 +19,25 @@ security:
             anonymous: ~
             pattern:    ^/
             http_basic: ~
-            provider: our_db_provider
+            provider: databaseusers
             form_login:
               login_path: login
               check_path: login
-              default_target_path: pedidos
+              default_target_path: indice
             logout:
               path: /logout
-              target: /
+              target: indice
 
             # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
 
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: true
-            # https://symfony.com/doc/current/security/form_login_setup.html
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: /poll/public, roles: [ROLE_USER, ROLE_ADMIN] }
-         - { path: ^/my, roles: ROLE_USER }
-         - { path: ^/proveedores, roles: ROLE_USER }
-         - { path: ^/settings, roles: ROLE_ADMIN }
+         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/registro$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: /private/, roles: [ROLE_USER, ROLE_ADMIN] }
+         - { path: /admin/, roles: ROLE_ADMIN }

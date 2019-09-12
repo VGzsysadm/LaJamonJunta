@@ -1,0 +1,174 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+<script>
+    CKEDITOR.replace( 'pcomment[description]' );
+</script>
+{% endblock %}
+
+{% block body %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('post_index')}}">{% trans %}Post{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('post_show', {'id': post.id}) }}">{{ post.tittle}}</a></li>
+  </ol>
+</nav>
+<div class="col text-right">
+    {% if post.user == app.user %}
+    {{ include('post/_delete_form.html.twig', {'button_label': 'delete'}) }}
+    <a href="{{ path('post_edit', {'id': post.id}) }}"><button type="button" class="btn btn-outline-primary">{% trans %}Editar post{% endtrans %}</button></a>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+      {% if post.pinned == false %}
+      <a href="{{ path('post_pinned', {'id': post.id}) }}"><button type="button" class="btn btn-outline-primary">{% trans %}Fijar post{% endtrans %}</button></a>
+      {% endif %}
+      {% if post.pinned == true %}
+      <a href="{{ path('post_pinned', {'id': post.id}) }}"><button type="button" class="btn btn-outline-primary">{% trans %}Desfijar post{% endtrans %}</button></a>
+      {% endif %}
+    {% endif %}
+    <a href="{{ path('post_new') }}"><button type="button" class="btn btn-outline-primary">{% trans %}Nuevo post{% endtrans %}</button></a>
+</div>
+<br>
+
+<main role="main" class="container">
+<div class="card mb-12">
+  <div class="row no-gutters">
+    <div class="col-md-3 text-center">
+      <img class="rounded-circle" width="200" height="200" src="{{ asset('uploads/avatar/') }}{{ post.user.getProfile.avatar }}">
+    </div>
+    <div class="col-md-9">
+      <div class="card-body">
+        <h5 class="card-title">{{ post.tittle}}</h5>
+        <p class="card-text"><small class="text-muted">{{ post.user.getUsername}}</a>, {{ post.timestamp|date("m/d/Y H:i")}}
+        {% if post.user.getHierarchy.score == 0 or null %}
+        <small>Mindugi</small>
+        {% endif %}
+        {% if post.user.getHierarchy.score in range(1, 29) %}
+        <i class="far fa-star-half fa-xs"></i><small> Jamonero ocasional</small>
+        {% endif %}
+        {% if post.user.getHierarchy.score in range(30, 99) %}
+        <i class="far fa-star fa-xs"></i><small> Degustador de Jamones</small>
+        {% endif %}
+        {% if post.user.getHierarchy.score in range(100, 399) %}
+        <i class="fas fa-star-half-alt fa-xs"></i><small> Gran catador</small>
+        {% endif %}
+        {% if post.user.getHierarchy.score in range(400, 599) %}
+        <i class="fas fa-star fa-xs"></i><small> Jamón de bastos</small>
+        {% endif %}
+        {% if post.user.getHierarchy.score in range(600, 999) %}
+        <i class="fas fa-medal fa-xs"></i><small> Experto en la Montanera</small>
+        {% endif %}
+        {% if post.user.getHierarchy.score >= 1000 %}
+        <i class="fas fa-jedi fa-x2"></i><small> Rey de la dehesa</small>
+        {% endif %}
+        {% if post.user.getAward.trophy == 1 %}
+        <strong class="tag tag-default tag-pill">Premios: Colaborador</strong>
+        {% endif %}
+        {% if post.user.getAward.trophy == 2 %}
+        <strong class="tag tag-default tag-pill">Premios:Gran colaborador</strong>
+        {% endif %}
+        {% if post.user.getAward.trophy == 3 %}
+        <strong class="tag tag-default tag-pill">Premios: Oficial</strong>
+        {% endif %}
+        {% if post.user.getAward.trophy >= 4 %}
+        <strong class="tag tag-default tag-pill">Premios: Heroe</strong>
+        {% endif %}
+        </small>
+        </p>
+        <p class="card-text">{{ post.posted| raw}}</p>
+        {% if post.modified is not null %}
+        <p class="card-text"><small class="text-muted">{% trans %}editado{% endtrans %}, {{ post.modified|date("m/d/Y H:i")}}</small></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+<br>
+<hr>
+{% for pcomment in pcomments%}
+ {% if pcomment.user == app.user %}
+ <div class="col text-right">
+    {{ include('post/_delete_comment.html.twig', {'button_label': 'delete'}) }}
+    <a href="{{ path('pcomment_edit', {'id': pcomment.id}) }}"><button type="button" class="btn btn-outline-primary">{% trans %}Editar comentario{% endtrans %}</button></a>
+  </div>
+  <br>
+    {% endif %} 
+<main role="main" class="container">
+<div class="card mb-12">
+  <div class="row no-gutters">
+    <div class="col-md-3 text-center">
+      <img class="rounded-circle" width="200" height="200" src="{{ asset('uploads/avatar/') }}{{ pcomment.user.getProfile.avatar }}">
+    </div>
+    <div class="col-md-9">
+      <div class="card-body">
+        <p class="card-text"><small class="text-muted">{{ pcomment.user.getUsername}}</a>, {{ pcomment.timestamp|date("m/d/Y H:i")}}
+        {% if pcomment.user.getHierarchy.score == 0 or null %}
+        <small>Mindugi</small>
+        {% endif %}
+        {% if pcomment.user.getHierarchy.score in range(1, 29) %}
+        <i class="far fa-star-half fa-xs"></i><small> Jamonero ocasional</small>
+        {% endif %}
+        {% if pcomment.user.getHierarchy.score in range(30, 99) %}
+        <i class="far fa-star fa-xs"></i><small> Degustador de Jamones</small>
+        {% endif %}
+        {% if pcomment.user.getHierarchy.score in range(100, 399) %}
+        <i class="fas fa-star-half-alt fa-xs"></i><small> Gran catador</small>
+        {% endif %}
+        {% if pcomment.user.getHierarchy.score in range(400, 599) %}
+        <i class="fas fa-star fa-xs"></i><small> Jamón de bastos</small>
+        {% endif %}
+        {% if pcomment.user.getHierarchy.score in range(600, 999) %}
+        <i class="fas fa-medal fa-xs"></i><small> Experto en la Montanera</small>
+        {% endif %}
+        {% if pcomment.user.getHierarchy.score >= 1000 %}
+        <i class="fas fa-jedi fa-x2"></i><small> Rey de la dehesa</small>
+        {% endif %}
+        {% if pcomment.user.getAward.trophy == 1 %}
+        <strong class="tag tag-default tag-pill">Premios: Colaborador</strong>
+        {% endif %}
+        {% if pcomment.user.getAward.trophy == 2 %}
+        <strong class="tag tag-default tag-pill">Premios:Gran colaborador</strong>
+        {% endif %}
+        {% if pcomment.user.getAward.trophy == 3 %}
+        <strong class="tag tag-default tag-pill">Premios: Oficial</strong>
+        {% endif %}
+        {% if pcomment.user.getAward.trophy >= 4 %}
+        <strong class="tag tag-default tag-pill">Premios: Heroe</strong>
+        {% endif %}
+        </small>
+        </p>
+        <p class="card-text">{{ pcomment.description| raw}}</p>
+        {% if pcomment.modified is not null %}
+        <p class="card-text"><small class="text-muted">editado, {{ pcomment.modified|date("m/d/Y H:i")}}</small></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+<br>
+{% endfor %}
+<div class="container">
+  <div class="row">
+    <div class="col align-self-start">
+    </div>
+        <div class="navigation col align-self-center">{{ knp_pagination_render(pcomments) }}</div>
+    <div class="col align-self-end">
+    </div>
+  </div>
+</div>
+<br>
+{{ form_start(form) }}
+    <div class="col text-center">
+    {{ form_widget(form.description) }}
+    <div class="col text-center">
+        <a class="btn btn-secondary" href="{{ path('post_index')}}">Volver</a>
+        <input type="submit" class="btn btn-primary avatarization mx-auto" name="btnAddMore" value="Enviar comentario"/>
+    </div>
+    </div>
+{{ form_end(form) }}
+
+{% endblock %}
+

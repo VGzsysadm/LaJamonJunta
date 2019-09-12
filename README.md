@@ -6,7 +6,7 @@
 
 ### Prerequisites
 
-* PHP 7.1+ ( xml-zip-mysql-mbstring-intl)
+* PHP 7.3.0+ ( xml-zip-mysql-mbstring-intl)
 * Mysql
 * Composer
 
@@ -22,7 +22,7 @@ https://github.com/VGzsysadm/LaJamonJunta.git
 Install dependencies
 
 ```
-cd Inventory-app
+cd LaJamonJunta
 composer install
 ```
 ### Prod mode
@@ -33,8 +33,9 @@ Create the database and tables:
 
 ```
 php bin/console doctrine:database:create
-php bin/console make:migration
-php bin/console doctrine:migrations:migrate
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:validate
+php bin/console doctrine:schema:update --force
 ```
 
 Apache2 site

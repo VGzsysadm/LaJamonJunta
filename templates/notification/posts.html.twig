@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NotificationController!{% endblock %}
+
+{% block body %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('notifications-activity') }}">{% trans %}Notificaciones{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('notifications-posts') }}">{% trans %}Mis Posts{% endtrans %}</a></li>
+  </ol>
+</nav>
+<br>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{{ path('notifications-activity') }}">{% trans %}Actividad{% endtrans %}</a></li>
+            <li class="list-group-item"><a href="{{ path('notifications-comments') }}">{% trans %}Comentarios{% endtrans %}</a></li>
+            <li class="list-group-item active"><a href="{{ path('notifications-posts') }}">{% trans %}Mis Posts{% endtrans %}</a></li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+      
+      
+        <div class="col-md-12">
+                            <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span> Últimos posts</h4><span class="badge badge-primary">Total: {{ posts.getTotalItemCount }}</span>
+                            {% if posts.getTotalItemCount == 0 %}
+                            <p>No se han encontrado datos</p>
+                            {% endif %} 
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    {% for post in posts %}
+                                        <tr>
+                                        <td>
+                                            <a href="{{ path('profiles', {'id': post.user.getId}) }}"><strong>{{ post.user.username}}</strong></a>: <a href="{{ path('post_show', {'id': post.getId}) }}">{{ post.tittle}}</a> <strong> a las {{ post.timestamp|date("m/d/Y H:i")}}</strong>
+                                        </td>
+                                    </tr>
+                                {% endfor %}  
+                                </tbody>
+                            </table>
+            </div>
+            <div class="navigation">{{ knp_pagination_render(posts) }}</div>
+
+
+    </div>
+  </div>
+</div>
+
+<br>
+{% endblock %}

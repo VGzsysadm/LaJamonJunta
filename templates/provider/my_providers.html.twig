@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('provider') }}">{% trans %}Proveedores{% endtrans %}</a></li>
+  </ol>
+</nav>
+<br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#Id</th>
+      <th scope="col">{% trans %}Proveedor{% endtrans %}</th>
+      <th scope="col">{% trans %}Activado{% endtrans %}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for provider in providers %}
+    <tr>
+      <th scope="row">{{ provider.getId}}</th>
+      <td><a href="{{ path('show_provider', {'id': provider.id}) }}">{{ provider.name}}</a></td>
+      {% if provider.active == true %}
+      <td>Si</td>
+      {% else %}
+      <td>No, añade ofertas.</td>
+      {% endif %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

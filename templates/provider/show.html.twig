@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+<script>
+$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });  
+</script>
+<script>
+    CKEDITOR.replace( 'ocomment[description]' );
+</script>
+{% endblock %}
+{% block body %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">{% trans %}Índice{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('provider') }}">{% trans %}Proveedores{% endtrans %}</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('show_provider', {'id': provider.id}) }}">{{ provider.name }}</a></li>
+  </ol>
+</nav>
+<br>
+
+<div class="col text-right">
+    {% if provider.user == app.user %}
+    <a href="{{ path('offer_new', {'id': provider.id}) }}"><button type="button" class="btn btn-outline-primary">{% trans %}Añadir oferta{% endtrans %}</button></a>
+    <a href="{{ path('edit_provider', {'id': provider.id}) }}"><button type="button" class="btn btn-outline-primary">{% trans %}Editar Proveedor{% endtrans %}</button></a>
+    {% endif %}
+
+</div>
+ <main role="main" class="container">
+    <div class="my-3 p-3 rounded shadow-sm">
+        <h6 class="border-bottom border-gray pb-2 mb-0"></h6>
+        
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ asset('uploads/documents/') }}{{ provider.picture }}" data-toggle="lightbox">
+                    <img id="single_image" src="{{ asset('uploads/documents/') }}{{ provider.picture }}" alt="..." class="img-thumbnail">
+                    </a>
+                </div>
+                <div class="col-md-6">
+                
+    <h5 class="card-title">{{ provider.name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{% trans %}Presentado por{% endtrans %}: <a href="{{ path('profiles', {'id': provider.user.getId}) }}">{{ provider.user.getUsername}}</a></h6>
+    <p class="card-text">{{ provider.description| raw}}</p>
+    <p><small><i class="fas fa-map-marker"></i> {% trans %}Location{% endtrans %}: {{ provider.location}} - {% trans %}State{% endtrans %}: {{ provider.state}}</small></p>
+    {% if provider.web == null %}
+    <p><small><i class="fas fa-globe"></i> {% trans %}Web{% endtrans %}: {% trans %} Sin web{% endtrans %}</small></p>
+    {% else %}
+    <p><small><i class="fas fa-globe"></i> {% trans %}Web{% endtrans %}: <a href="https://{{provider.web}}" target="_blank"> {{ provider.web}}</a></small></p>
+    {% endif %}
+    {% if provider.documentone == null %}
+    <p><i class="far fa-file-pdf"></i><small> {% trans %}Documentos{% endtrans %}: {% trans %}Sin documentos adjuntos{% endtrans %}.</small></p>
+    {% else %}
+    <p><i class="far fa-file-pdf"></i><small> {% trans %}Documentos{% endtrans %}:<a href="{{ asset('uploads/documents/') }}{{ provider.documentone }}" class="card-link" target="_blank"> {{provider.documentone}}</a></small></p>
+    {% endif %}         
+</main>
+
+<div class="container">
+  <!-- start row -->
+  <div class="row">
+      {% for offer in offers %}
+    <div class="col-md-4 col-lg-4">
+          <div class="card bg-dark text-white main-collage">
+            {% if offer.offerpicture == null %}
+            <img class="card-img-top img-fluid" src="{{ asset('uploads/documents/defaultoffer.png') }}" alt="offer image cap">
+            {% else %}
+            <img class="card-img-top img-fluid" src="{{ asset('uploads/documents/') }}{{ offer.offerpicture }}" alt="offer image cap">
+            {% endif %}
+            <div class="card-body">
+            {% if offer.user == app.user %}
+            <a href="{{ path('edit_offer', {'id': offer.id}) }}"><button type="button" class="btn btn-primary btn-sm">{% trans %}Editar oferta{% endtrans %}</button></a>
+            <form method="post" action="{{ path('delete_offer', {'id': offer.id}) }}" onsubmit="return confirm('{% trans %}Are you sure you want to delete this item?{% endtrans %}');">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ offer.id) }}">
+            <button class="btn btn-danger btn-sm">{% trans %}Borrar{% endtrans %}</button>
+            </form>
+            {% endif %}
+            <p class="card-text">{{ offer.description| raw}}</p>
+            </div>
+          </div>
+    </div>
+    {% endfor %}
+  </div>
+<!-- end row -->
+</div>
+<!-- getComments -->
+{% for ocomment in ocomments %}
+ {% if ocomment.user == app.user %}
+ <div class="col text-right">
+    <a href="{{ path('ocomment_edit', {'id': ocomment.id}) }}"><button type="button" class="btn btn-outline-primary">{% trans %}Editar Comentario{% endtrans %}</button></a>
+  </div>
+  <br>
+    {% endif %} 
+<main role="main" class="container">
+<div class="card mb-12">
+  <div class="row no-gutters">
+    <div class="col-md-3 text-center">
+      <img class="rounded-circle" width="200" height="200" src="{{ asset('uploads/avatar/') }}{{ ocomment.user.getProfile.avatar }}">
+    </div>
+    <div class="col-md-9">
+      <div class="card-body">
+        <p class="card-text"><small class="text-muted">{{ ocomment.user.getUsername}}</a>, {{ ocomment.timestamp|date("m/d/Y H:i")}}
+        {% if ocomment.user.getHierarchy.score == 0 or null %}
+        <small>Mindugi</small>
+        {% endif %}
+        {% if ocomment.user.getHierarchy.score in range(1, 29) %}
+        <i class="far fa-star-half fa-xs"></i><small> Jamonero ocasional</small>
+        {% endif %}
+        {% if ocomment.user.getHierarchy.score in range(30, 99) %}
+        <i class="far fa-star fa-xs"></i><small> Degustador de Jamones</small>
+        {% endif %}
+        {% if ocomment.user.getHierarchy.score in range(100, 399) %}
+        <i class="fas fa-star-half-alt fa-xs"></i><small> Gran catador</small>
+        {% endif %}
+        {% if ocomment.user.getHierarchy.score in range(400, 599) %}
+        <i class="fas fa-star fa-xs"></i><small> Jamón de bastos</small>
+        {% endif %}
+        {% if ocomment.user.getHierarchy.score in range(600, 999) %}
+        <i class="fas fa-medal fa-xs"></i><small> Experto en la Montanera</small>
+        {% endif %}
+        {% if ocomment.user.getHierarchy.score >= 1000 %}
+        <i class="fas fa-jedi fa-x2"></i><small> Rey de la dehesa</small>
+        {% endif %}
+        {% if ocomment.user.getAward.trophy == 1 %}
+        <strong class="tag tag-default tag-pill">Premios: Colaborador</strong>
+        {% endif %}
+        {% if ocomment.user.getAward.trophy == 2 %}
+        <strong class="tag tag-default tag-pill">Premios:Gran colaborador</strong>
+        {% endif %}
+        {% if ocomment.user.getAward.trophy == 3 %}
+        <strong class="tag tag-default tag-pill">Premios: Oficial</strong>
+        {% endif %}
+        {% if ocomment.user.getAward.trophy >= 4 %}
+        <strong class="tag tag-default tag-pill">Premios: Heroe</strong>
+        {% endif %}
+        </small>
+        </p>
+        <p class="card-text">{{ ocomment.description| raw}}</p>
+        {% if ocomment.modified is not null %}
+        <p class="card-text"><small class="text-muted">{% trans %}Editado{% endtrans %}, {{ ocomment.modified|date("m/d/Y H:i")}}</small></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+<br>
+{% endfor %}
+<!-- endComments -->
+<div class="container">
+  <div class="row">
+    <div class="col align-self-start">
+    </div>
+        <div class="navigation col align-self-center">{{ knp_pagination_render(ocomments) }}</div>
+    <div class="col align-self-end">
+    </div>
+  </div>
+</div>
+<br>
+<!-- Start comments Form -->
+{{ form_start(form) }}
+    <div class="col text-center">
+    {{ form_widget(form.description) }}
+    <div class="col text-center">
+        <a class="btn btn-secondary" href="{{ path('provider')}}">{% trans %}Volver{% endtrans %}</a>
+        <input type="submit" class="btn btn-primary avatarization mx-auto" name="btnAddMore" value="Enviar comentario"/>
+    </div>
+    </div>
+{{ form_end(form) }}
+<!-- End comments Form -->
+{% endblock %}

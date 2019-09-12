@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ path('index') }}">
+    <img src="{{ asset('img/logo.jpg') }}" width="70" height="50" class="d-inline-block align-top" alt="">
+    La Jamonjunta
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+    {% if app.User != null %}
+      <li class="nav-item">
+        <div class="dropdown">
+            <a class="nav-link" id="imageDropdown" data-toggle="dropdown" href="#">{% trans %}Acciones{% endtrans %}</a>
+            <div class="dropdown-menu animated fadeIn" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{ path('provider') }}">{% trans %}Proveedores{% endtrans %}</a>
+                <a class="dropdown-item" href="{{ path('add_provider') }}"><i class="fas fa-folder-plus"></i> {% trans %}Nuevo Proveedor{% endtrans %}</a>
+                <a class="dropdown-item" href="{{ path('my_provider') }}">{% trans %}Mis proveedores{% endtrans %}</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ path('post_index') }}">{% trans %}Posts{% endtrans %}</a>
+                <a class="dropdown-item" href="{{ path('post_new') }}"><i class="fas fa-folder-plus"></i> {% trans %}Nuevo Post{% endtrans %}</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ path('get_users') }}">{% trans %}Usuarios{% endtrans %}</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ path('admin_dashboard') }}">{% trans %}Panel de Administración{% endtrans %}</a>
+                {% endif %}
+            </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div class="dropdown">
+            <a class="nav-link" id="imageDropdown" data-toggle="dropdown" href="#">
+            <img class="rounded-circle" width="30" height="30" src="{{ asset('uploads/avatar/') }}{{ app.user.getProfile.avatar }}"> {% trans %}Perfil{% endtrans %}
+            </a>
+            <div class="dropdown-menu animated fadeIn" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{ path('profile', {'id': app.user.id}) }}"><i class="far fa-user"></i> {% trans %}Mi Perfil{% endtrans %}</a>
+                <a class="dropdown-item" href="{{ path('edit_password', {'id': app.user.id}) }}"><i class="fas fa-key"></i> {% trans %}Restablecer contraseña{% endtrans %}</a>
+                <a class="dropdown-item" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"></i> {% trans %}Cerrar sesión{% endtrans %}</a>
+            </div>
+        </div>
+      </li>
+      
+      <li class="nav-item">
+        <div class="dropdown">
+            <a class="nav-link" id="loadnotifications" data-toggle="dropdown" href="#"><i class="fas fa-bell"></i> {% trans %}Notificaciones{% endtrans %}</a>
+            <div class="dropdown-menu animated fadeIn notifications" aria-labelledby="dropdownMenuButton">
+                <div class="container">
+                    <p class="notification-empty"></p>
+                    <div id="notification"></div>
+                    <a href="{{ path('notifications-activity') }}"><p class="text-center">{% trans %}Ver todas las notificaciones{% endtrans %}</p></a>
+                </div>
+            </div>
+        </div>
+      </li>
+
+      {% endif %}
+      {% if app.User == null %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('registro') }}"><i class="fas fa-sign-in-alt"></i> {% trans %}Registro{% endtrans %}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('login') }}"><i class="far fa-user"></i> {% trans %}Login{% endtrans %}</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <div class="dropdown">
+            <a class="nav-link" id="imageDropdown" data-toggle="dropdown" href="#">
+            <img class="rounded-circle" width="30" height="30" src="{{ asset('img/spanish.svg') }}"> Idioma
+            </a>
+            <div class="dropdown-menu animated fadeIn" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{ path('es') }}"><img class="rounded-circle" width="30" height="30" src="{{ asset('img/spanish.svg') }}"> {% trans %}Castellano{% endtrans %}</a>
+                <a class="dropdown-item" href="{{ path('ca') }}"><img class="rounded-circle" width="30" height="30" src="{{ asset('img/catalonia.svg') }}"> {% trans %}Catalán{% endtrans %}</a>
+                <a class="dropdown-item" href="{{ path('ba') }}"><img class="rounded-circle" width="30" height="30" src="{{ asset('img/baleares.svg') }}"> {% trans %}Mallorquín{% endtrans %}</a>
+                <a class="dropdown-item" href="{{ path('va') }}"><img class="rounded-circle" width="30" height="30" src="{{ asset('img/valencia.svg') }}"> {% trans %}Valenciano{% endtrans %}</a>
+                <a class="dropdown-item" href="{{ path('eu') }}"><img class="rounded-circle" width="30" height="30" src="{{ asset('img/euskera.svg') }}"> {% trans %}Euskera{% endtrans %}</a>
+                <a class="dropdown-item" href="{{ path('gl') }}"><img class="rounded-circle" width="30" height="30" src="{{ asset('img/gallego.svg') }}"> {% trans %}Gallego{% endtrans %}</a>
+                <a class="dropdown-item" href="{{ path('oc') }}"><img class="rounded-circle" width="30" height="30" src="{{ asset('img/aran.svg') }}"> {% trans %}Aranés{% endtrans %}</a>
+            </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

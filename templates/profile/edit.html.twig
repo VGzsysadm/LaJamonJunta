@@ -1,8 +1,19 @@
 {% extends 'base.html.twig' %}
-	{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/userSingle.css') }}">{% endblock %}
-{% block title %}User management{% endblock %}
-
 {% block body %}
-    <h1>Edit User</h1>
-    {{ include('profile/_form.html.twig', {'button_label': 'Update'}) }}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb navigation">
+    <li class="breadcrumb-item"><a href="{{ path('indice') }}">Índice</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('profile', {'id': app.user.id}) }}">Mi perfil</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('profile-edit', {'id': app.user.id}) }}">Editar</a></li>
+  </ol>
+</nav>
+<div class="col text-center">
+                                {{ form_start(form) }}
+                                {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+                                <div class="col text-center">
+                                <a class="btn btn-secondary" href="{{ path('profile', {'id': app.user.id}) }}">Volver</a>
+                                <input type="submit" class="btn btn-primary avatarization mx-auto" name="btnAddMore" value="Guardar"/>
+                                </div>
+                                {{ form_end(form) }}
+</div>
 {% endblock %}
